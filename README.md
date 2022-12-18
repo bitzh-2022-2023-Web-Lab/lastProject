@@ -16,14 +16,16 @@
 ## 使用的组件
 - Element Plus
 - Axios
+- Vue Router
 
 ## 注意事项
 1. 部分页面需要配合后端才可以正常使用。
 
 ## 参考资料
-- [Vue.js文档](https://cn.vuejs.org/)
-- [Element-plus文档](https://element-plus.gitee.io/zh-CN/)
-- [Axios文档](https://www.axios-http.cn/)
+- [Vue.js 文档](https://cn.vuejs.org/)
+- [Element Plus 文档](https://element-plus.gitee.io/zh-CN/)
+- [Axios 文档](https://www.axios-http.cn/)
+- [Vue Router 文档](https://router.vuejs.org/zh/)
 
 ## 鸣谢
 - [genshin-kit/genshin-kit-node](https://github.com/genshin-kit/genshin-kit-node) 提供的米游社官方接口开发工具包
