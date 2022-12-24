@@ -76,6 +76,7 @@ const navigateToPost = (url: any) => {
     </template>
     <div class="card_body" @click="navigateToPost(item.url)">
         <div class="title">{{ item.title }}</div>
+        <br>
         <div class="text">{{ item.text }}</div>
     </div>
     <div class="card_bottom">
