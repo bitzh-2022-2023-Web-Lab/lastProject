@@ -29,6 +29,7 @@
 
 ## 鸣谢
 - [genshin-kit/genshin-kit-node](https://github.com/genshin-kit/genshin-kit-node) 提供的米游社官方接口开发工具包
+- [米游社/原神板块](https://www.miyoushe.com/ys/) 提供的参考设计及资源
 
 ## Author
 By [JulienZeng](https://github.com/JulienZeng)
