@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ElMessage } from "element-plus";
+import { ElNotification } from "element-plus";
 import { ref } from "vue";
 const data = ref();
 data.value = [
@@ -14,7 +14,7 @@ data.value = [
     isFan: false,
     watch: "75w+",
     commentCount: 6000,
-    like: "25w+"
+    like: "25w+",
   },
   {
     authorName: "用户2",
@@ -27,7 +27,7 @@ data.value = [
     isFan: false,
     watch: "200w+",
     commentCount: 24000,
-    like: "30w+"
+    like: "30w+",
   },
   {
     authorName: "用户3",
@@ -40,58 +40,93 @@ data.value = [
     isFan: false,
     watch: "100w+",
     commentCount: 6000,
-    like: "15w+"
+    like: "15w+",
   },
 ];
 
 const star = (index: number) => {
-    if(data.value[index].isFan){
-        ElMessage.success("取消关注成功。")
-    }else{
-        ElMessage.success("关注成功！")
-    }
-    data.value[index].isFan = !data.value[index].isFan
-}
+  if (data.value[index].isFan) {
+    ElNotification({
+      message: "取消关注成功。",
+      type: "success",
+    });
+  } else {
+    ElNotification({
+      message: "关注成功！",
+      type: "success",
+    });
+  }
+  data.value[index].isFan = !data.value[index].isFan;
+};
 
 const navigateToPost = (url: any) => {
-    window.open(url, "_blank")
-}
+  window.open(url, "_blank");
+};
 </script>
 
 <template>
-  <el-card class="box_card" v-for="(item, index) in data" :key="index" shadow="hover">
+  <el-card
+    class="box_card"
+    v-for="(item, index) in data"
+    :key="index"
+    shadow="hover"
+  >
     <template #header>
       <div class="card_header">
         <div class="postAuthor">
-          <el-avatar :size="25" :src="item.authorAvatar" style="margin: 0 5px;" />
+          <el-avatar
+            :size="25"
+            :src="item.authorAvatar"
+            style="margin: 0 5px"
+          />
           <span style="font-weight: bold; margin: 0 5px">{{
             item.authorName
           }}</span>
-          <span style="color: gray; margin: 0 5px; font-size: 12px;"> {{ item.time }}</span>
+          <span style="color: gray; margin: 0 5px; font-size: 12px">
+            {{ item.time }}</span
+          >
         </div>
         <div class="btn-star">
-          <el-button :type="item.isFan? 'info' : 'primary' " round @click="star(index)">{{ item.isFan? "取消关注" : "关注" }}</el-button>
+          <el-button
+            :type="item.isFan ? 'info' : 'primary'"
+            round
+            @click="star(index)"
+            >{{ item.isFan ? "取消关注" : "关注" }}</el-button
+          >
         </div>
       </div>
     </template>
     <div class="card_body" @click="navigateToPost(item.url)">
-        <div class="title">{{ item.title }}</div>
-        <br>
-        <div class="text">{{ item.text }}</div>
+      <div class="title">{{ item.title }}</div>
+      <br />
+      <div class="text">{{ item.text }}</div>
     </div>
     <div class="card_bottom">
-        <div style="display: flex; flex-direction: row;justify-content: end;color: gray;">
-            <div class="watch"><el-icon><View /></el-icon>{{ item.watch }}</div>
-            <div class="commentCount"><el-icon><ChatDotRound /></el-icon>{{ item.commentCount }}</div>
-            <div class="like"><el-icon><Star /></el-icon>{{ item.like }}</div>
+      <div
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: end;
+          color: gray;
+        "
+      >
+        <div class="watch">
+          <el-icon><View /></el-icon>{{ item.watch }}
         </div>
+        <div class="commentCount">
+          <el-icon><ChatDotRound /></el-icon>{{ item.commentCount }}
+        </div>
+        <div class="like">
+          <el-icon><Star /></el-icon>{{ item.like }}
+        </div>
+      </div>
     </div>
   </el-card>
 </template>
 
 <style scoped>
-.box_card{
-    margin: 10px 0;
+.box_card {
+  margin: 10px 0;
 }
 
 .card_header {
@@ -105,30 +140,32 @@ const navigateToPost = (url: any) => {
   align-items: center;
 }
 
-.card_body{
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
+.card_body {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
 }
 
-.card_body:hover .title{
-    color: #00c3ff;
+.card_body:hover .title {
+  color: #00c3ff;
 }
 
-.title{
-    display: flex;
-    font-size: 20px;
-    font-weight: lighter;
+.title {
+  display: flex;
+  font-size: 20px;
+  font-weight: lighter;
 }
 
-.text{
-    display: flex;
+.text {
+  display: flex;
 }
 
-.watch,.commentCount,.like{
-    margin: 0 5px;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
+.watch,
+.commentCount,
+.like {
+  margin: 0 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 </style>
