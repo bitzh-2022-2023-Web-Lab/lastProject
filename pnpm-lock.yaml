@@ -6,6 +6,7 @@ specifiers:
   '@vueuse/core': ^9.7.0
   axios: ^1.2.1
   element-plus: ^2.2.26
+  mitt: ^3.0.0
   typescript: ^4.9.3
   unplugin-auto-import: ^0.12.1
   unplugin-vue-components: ^0.22.12
@@ -19,6 +20,7 @@ dependencies:
   '@vueuse/core': 9.7.0_vue@3.2.45
   axios: 1.2.1
   element-plus: 2.2.26_vue@3.2.45
+  mitt: 3.0.0
   vue: 3.2.45
   vue-router: 4.1.6_vue@3.2.45
 
@@ -841,6 +843,10 @@ packages:
     dependencies:
       brace-expansion: 2.0.1
     dev: true
+
+  /mitt/3.0.0:
+    resolution: {integrity: sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==}
+    dev: false
 
   /mlly/1.0.0:
     resolution: {integrity: sha512-QL108Hwt+u9bXdWgOI0dhzZfACovn5Aen4Xvc8Jasd9ouRH4NjnrXEiyP3nVvJo91zPlYjVRckta0Nt2zfoR6g==}
