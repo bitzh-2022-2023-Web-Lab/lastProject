@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { Setting } from "@element-plus/icons-vue";
 import { ElMessageBox, ElNotification } from "element-plus";
+import { useRouter } from "vue-router";
+import mitt from "../bus";
+
+const router = useRouter();
 
 const logout = () => {
   ElMessageBox.confirm("确认要退出登录吗？", "退出登录", {
@@ -8,15 +12,27 @@ const logout = () => {
     cancelButtonText: "取消",
     type: "warning",
   })
-    .then(() => {
-      // TODO: Logout
+    .then((action) => {
+      if (action == "confirm") {
+        console.log("ok");
+        window.localStorage.removeItem("token");
+        mitt.emit("changeAuthShow", true);
+        ElNotification({
+          title: "退出登录",
+          message: "您已退出登录",
+          type: "success",
+        });
+        router.replace("/");
+      }
     })
-    .catch(() => {
-      ElNotification({
-        title: "退出登录",
-        message: "您已取消退出登录",
-        type: "info",
-      });
+    .catch((action) => {
+      if (action == "cancel") {
+        ElNotification({
+          title: "退出登录",
+          message: "您已取消退出登录",
+          type: "info",
+        });
+      }
     });
 };
 </script>

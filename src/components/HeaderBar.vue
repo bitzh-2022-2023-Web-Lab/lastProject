@@ -1,7 +1,11 @@
 <script lang="ts" setup>
-
 import { useDark, useToggle } from "@vueuse/core";
 import { ElNotification, ElMessageBox } from "element-plus";
+import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+import mitt from "../bus";
+
+const router = useRouter();
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
@@ -16,15 +20,27 @@ const logout = () => {
     cancelButtonText: "取消",
     type: "warning",
   })
-    .then(() => {
-      // TODO: Logout
+    .then((action) => {
+      if (action == "confirm") {
+        console.log("ok");
+        window.localStorage.removeItem("token");
+        changeShowAuth();
+        ElNotification({
+          title: "退出登录",
+          message: "您已退出登录",
+          type: "success",
+        });
+        router.replace("/");
+      }
     })
-    .catch(() => {
-      ElNotification({
-        title: "退出登录",
-        message: "您已取消退出登录",
-        type: "info",
-      });
+    .catch((action) => {
+      if (action == "cancel") {
+        ElNotification({
+          title: "退出登录",
+          message: "您已取消退出登录",
+          type: "info",
+        });
+      }
     });
 };
 
@@ -32,6 +48,19 @@ const toGithub = (url: any) => {
   window.open(url, "_blank");
 };
 
+const showAuth = ref();
+const changeShowAuth = () => {
+  const token = window.localStorage.getItem("token");
+  token ? (showAuth.value = false) : (showAuth.value = true);
+  console.log(showAuth);
+};
+changeShowAuth();
+
+onMounted(() => {
+  mitt.on("changeAuthShow", (e: any) => {
+    showAuth.value = !showAuth.value;
+  });
+});
 </script>
 
 <template>
@@ -42,13 +71,19 @@ const toGithub = (url: any) => {
     :ellipsis="false"
     @select="handleSelect"
   >
-    <el-menu-item index="0">LOGO</el-menu-item>
+    <el-menu-item index="0">GenshinHelper</el-menu-item>
     <el-menu-item index="Home" @click="$router.push('/')">主页</el-menu-item>
-    <el-menu-item index="DailyNote" @click="$router.push('/user/dailyNote')">实时便笺</el-menu-item>
+    <el-menu-item index="DailyNote" @click="$router.push('/user/dailyNote')"
+      >实时便笺</el-menu-item
+    >
     <div class="flex-grow"></div>
-    
+
+    <!-- 未登录 -->
+    <el-menu-item v-if="showAuth" index="Auth" @click="$router.push('/auth')"
+      >登录/注册</el-menu-item
+    >
     <!-- 已登录 -->
-    <el-sub-menu index="User">
+    <el-sub-menu v-else index="User">
       <template #title>
         <div style="display: flex">
           <el-avatar
@@ -57,7 +92,9 @@ const toGithub = (url: any) => {
           />
         </div>
       </template>
-      <el-menu-item index="User" @click="$router.push('/user')">个人中心</el-menu-item>
+      <el-menu-item index="User" @click="$router.push('/user')"
+        >个人中心</el-menu-item
+      >
       <el-divider :style="{ margin: 0 }" />
       <el-menu-item index="2-4-2">
         <div style="display: flex; flex-direction: row" @click="logout()">
@@ -103,7 +140,12 @@ const toGithub = (url: any) => {
         <el-icon size="24" v-else><Moon /></el-icon>
       </div>
     </el-menu-item>
-    <el-menu-item index="4" @click="toGithub('https://github.com/bitzh-2022-2023-Web-Lab/lastProject')">
+    <el-menu-item
+      index="4"
+      @click="
+        toGithub('https://github.com/bitzh-2022-2023-Web-Lab/lastProject')
+      "
+    >
       <div>
         <i class="el-icon" style="font-size: 24px"
           ><svg
