@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { UserFilled } from "@element-plus/icons-vue";
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
+import { ref } from "vue";
+import axios from "axios";
+
+const API_BASE_URL = "http://127.0.0.1:5233";
 
 const form = reactive<{
   userName: String;
@@ -11,6 +15,31 @@ const form = reactive<{
   sex: 3,
   sign: "",
 });
+
+const loading = ref(false);
+const getUserInfo = () => {
+  loading.value = true;
+  axios
+    .post(`${API_BASE_URL}/getUserInfo`, null, {
+      headers: {
+        Authorization: window.localStorage.getItem("token"),
+      },
+    })
+    .then((res) => {
+      form.userName = res.data.data.userName;
+      form.sign = res.data.data.sign;
+      form.sex = res.data.data.sex;
+      loading.value = false;
+    })
+    .catch((err) => {
+      console.log(err);
+      loading.value = false;
+    });
+};
+
+onMounted(() => {
+  getUserInfo()
+})
 
 const onSubmit = () => {
   console.log("submit!");

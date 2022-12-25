@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { UserFilled } from "@element-plus/icons-vue";
-import { ref } from "vue";
+import axios from "axios";
+import { onMounted, ref } from "vue";
+
+const API_BASE_URL = "http://127.0.0.1:5233";
 
 const userInfo = ref<{
   userName: String;
@@ -10,20 +13,33 @@ const userInfo = ref<{
   sign: String;
   sex: number;
 }>();
-userInfo.value = {
-  userName: "用户11111",
-  avatar: "14561561-52156156-51561-411541",
-  phone: "",
-  userID: "14561561-52156156-51561-411541",
-  sign: "系统原装签名，送给每一位小可爱~",
-  sex: 0,
+
+const loading = ref(false);
+const getUserInfo = () => {
+  loading.value = true
+  axios
+    .post(`${API_BASE_URL}/getUserInfo`, null, {
+      headers: {
+        Authorization: window.localStorage.getItem("token"),
+      },
+    })
+    .then((res) => {
+      userInfo.value = res.data.data
+      loading.value = false
+    })
+    .catch((err) => {
+      console.log(err);
+      loading.value = false
+    });
 };
 
-// TODO: Get userInfo from API
+onMounted( () => {
+  getUserInfo()
+})
 </script>
 
 <template>
-  <el-card class="box-card">
+  <el-card v-loading="loading" class="box-card">
     <div style="display: flex; flex-direction: row">
       <div class="avatar">
         <el-avatar :size="75" :icon="UserFilled" />
@@ -58,9 +74,9 @@ userInfo.value = {
       </div>
       <div style="flex: 1"></div>
       <div>
-        <el-button type="primary"  @click="$router.push('/user/edit')">
-            <el-icon><Edit /></el-icon>
-            <span>编辑</span>
+        <el-button type="primary" @click="$router.push('/user/edit')">
+          <el-icon><Edit /></el-icon>
+          <span>编辑</span>
         </el-button>
       </div>
     </div>
