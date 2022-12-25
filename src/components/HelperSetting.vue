@@ -2,6 +2,10 @@
 import { reactive } from "vue";
 
 const form = reactive({
+  uid: "",
+  cookie: "",
+  server: "",
+  phone: "",
   resin_warning: false,
   warn_resin: 145,
   home_coin_warning: false,
@@ -9,8 +13,18 @@ const form = reactive({
   transformer_warning: false,
 });
 
-// TODO: Get form items from API
+const Genshin_Server = [
+  {
+    label: "天空岛/世界树",
+    value: "cn",
+  },
+  {
+    label: "Asia,America,HongKong etc.",
+    value: "os",
+  },
+];
 
+// TODO: Get form items from API
 
 const onSubmit = async () => {
   console.log("submit!");
@@ -26,11 +40,41 @@ const onSubmit = async () => {
       </div>
     </template>
 
-    <el-form
-      :model="form"
-      label-width="auto"
-      status-icon
-    >
+    <el-form :model="form" label-width="160px" status-icon>
+      <el-form-item label="UID">
+        <el-input v-model="form.uid" placeholder="请填入您的原神UID" />
+      </el-form-item>
+
+      <el-form-item label="Cookie">
+        <el-input
+          v-model="form.cookie"
+          type="textarea"
+          placeholder="请填入您的米游社Cookie"
+        />
+      </el-form-item>
+
+      <el-form-item label="服务器">
+        <el-select
+          v-model="form.server"
+          :placeholder="
+            form.server == 'cn'
+              ? `${Genshin_Server[0].label}`
+              : `${Genshin_Server[1].label}`
+          "
+        >
+          <el-option
+            v-for="(item, index) in Genshin_Server"
+            :key="index"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+      </el-form-item>
+
+      <el-form-item label="手机号" v-if="form.home_coin_warning||form.resin_warning||form.transformer_warning">
+        <el-input v-model="form.phone" placeholder="请填入接收提醒信息的手机号" />
+      </el-form-item>
+
       <el-form-item label="树脂提醒">
         <el-switch
           v-model="form.resin_warning"
@@ -81,10 +125,7 @@ const onSubmit = async () => {
       </el-form-item>
 
       <el-form-item>
-        <el-button
-          style="margin: auto"
-          type="primary"
-          @click="onSubmit()"
+        <el-button style="margin: auto" type="primary" @click="onSubmit()"
           >保存</el-button
         >
       </el-form-item>
