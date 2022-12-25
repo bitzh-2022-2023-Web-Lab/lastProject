@@ -5,7 +5,7 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 import mitt from '../bus'
 
-const API_BASE_URL = "http://127.0.0.1:5233"
+const API_BASE_URL = "http://api.genshinhelper.zjlblog.site";
 
 const router = useRouter()
 

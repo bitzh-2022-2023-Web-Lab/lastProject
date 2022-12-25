@@ -3,7 +3,7 @@ import { UserFilled } from "@element-plus/icons-vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
-const API_BASE_URL = "http://127.0.0.1:5233";
+const API_BASE_URL = "http://api.genshinhelper.zjlblog.site";
 
 const userInfo = ref<{
   userName: String;

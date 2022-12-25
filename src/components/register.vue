@@ -3,7 +3,7 @@ import { reactive, ref } from "vue";
 import { ElNotification, FormInstance, FormRules } from "element-plus";
 import axios from "axios";
 
-const API_BASE_URL = "http://127.0.0.1:5233"
+const API_BASE_URL = "http://api.genshinhelper.zjlblog.site";
 
 const formSize = ref("default");
 const ruleFormRef = ref<FormInstance>();

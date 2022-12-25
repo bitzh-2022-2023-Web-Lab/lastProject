@@ -4,7 +4,7 @@ import { onMounted, reactive } from "vue";
 import { ref } from "vue";
 import axios from "axios";
 
-const API_BASE_URL = "http://127.0.0.1:5233";
+const API_BASE_URL = "http://api.genshinhelper.zjlblog.site";
 
 const form = reactive<{
   userName: String;
