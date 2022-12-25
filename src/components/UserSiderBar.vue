@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Menu as IconMenu, Setting } from "@element-plus/icons-vue";
+import { Setting } from "@element-plus/icons-vue";
 import { ElMessageBox, ElNotification } from "element-plus";
 
 const logout = () => {
@@ -23,7 +23,7 @@ const logout = () => {
 
 <template>
   <el-card class="box-card">
-    <div style="width: 180px;">
+    <div style="width: 180px">
       <div style="font-size: 20px; font-weight: bold; height: 35px">
         个人中心
       </div>
@@ -31,15 +31,19 @@ const logout = () => {
     </div>
     <div>
       <el-menu class="el-menu-vertical-demo">
-        <el-menu-item index="1" @click="$router.push('/user/setting')">
+        <el-menu-item index="1" @click="$router.push('/user/dailyNote')">
+          <el-icon><Star /></el-icon>
+          <span>实时便笺</span>
+        </el-menu-item>
+        <el-menu-item index="2" @click="$router.push('/user/setting')">
           <el-icon><Setting /></el-icon>
           <span>Helper设置</span>
         </el-menu-item>
-        <el-menu-item index="2" @click="$router.push('/user/changePwd')">
+        <el-menu-item index="3" @click="$router.push('/user/changePwd')">
           <el-icon><EditPen /></el-icon>
           <span>更改密码</span>
         </el-menu-item>
-        <el-menu-item index="3" @click="$router.push('/user/edit')">
+        <el-menu-item index="4" @click="$router.push('/user/edit')">
           <el-icon><User /></el-icon>
           <span>编辑资料</span>
         </el-menu-item>

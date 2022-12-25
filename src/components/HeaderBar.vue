@@ -44,6 +44,7 @@ const toGithub = (url: any) => {
   >
     <el-menu-item index="0">LOGO</el-menu-item>
     <el-menu-item index="Home" @click="$router.push('/')">主页</el-menu-item>
+    <el-menu-item index="DailyNote" @click="$router.push('/user/dailyNote')">实时便笺</el-menu-item>
     <div class="flex-grow"></div>
     
     <!-- 已登录 -->
