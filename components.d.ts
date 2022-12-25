@@ -51,4 +51,7 @@ declare module '@vue/runtime-core' {
     UserCard: typeof import('./src/components/UserCard.vue')['default']
     UserSiderBar: typeof import('./src/components/UserSiderBar.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }
