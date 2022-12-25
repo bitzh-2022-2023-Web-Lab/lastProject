@@ -37,8 +37,11 @@ const checkPwd = (rule: any, value: any, callback: any) => {
   const LITTER = /^(?=.*[A-Z])[A-Za-z0-9]{8,16}$/;
   const litter = /^(?=.*[a-z])[A-Za-z0-9]{8,16}$/;
   const number = /^(?=.*[0-9])[A-Za-z0-9]{8,16}$/;
+  const chinese = /(?=.*[\u4e00-\u9fa5])/;
   if (value.length < 8 || value.length > 16) {
     callback(new Error("密码需为8~16位"));
+  } else if (chinese.test(value)) {
+    callback(new Error("密码不能包含中文"));
   } else {
     if (!LITTER.test(value)) {
       callback(new Error("密码至少包含一个大写字母"));
