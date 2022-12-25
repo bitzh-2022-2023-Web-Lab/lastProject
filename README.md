@@ -1,9 +1,9 @@
 # 北理珠-北理珠-2022-2023-1-Web程序设计-期末大作业
 
-## 设计主题：《原神》论坛 & 助手
+## 设计主题：《原神》助手
 
 ## Github
-[bitzh-2022-2023-Web-Lab/lastProject](https://github.com/bitzh-2022-2023-Web-Lab/lastProject.git)
+[bitzh-2022-2023-Web-Lab/lastProject](https://github.com/bitzh-2022-2023-Web-Lab/lastProject)
 
 ## 技术栈
 - Vue3
@@ -17,6 +17,17 @@
 - Element Plus
 - Axios
 - Vue Router
+
+## 页面
+- 主页
+- 登录
+- 注册
+- 找回密码
+- 个人中心
+- 更改密码
+- Helper设置
+- 编辑资料
+- DailyNote卡片
 
 ## 注意事项
 1. 部分页面需要配合后端才可以正常使用。
