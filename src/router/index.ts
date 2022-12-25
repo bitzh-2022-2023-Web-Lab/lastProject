@@ -7,6 +7,7 @@ import EditUserInfo from "../components/EditUserInfo.vue";
 import ChangePwd from "../components/ChangePwd.vue";
 import HelperSetting from "../components/HelperSetting.vue";
 import DailyNote from "../components/DailyNote.vue";
+import { ElMessage } from "element-plus";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -51,6 +52,18 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach(async (to, from, next) => {
+  const token = localStorage.getItem("token");
+  console.log(to.path);
+  if (!(to.path == "/auth" || to.path == "/")) {
+    if (!token) {
+      ElMessage.error("请先登录。");
+      await router.replace("/auth");
+    }
+  }
+  next();
 });
 
 export default router;
