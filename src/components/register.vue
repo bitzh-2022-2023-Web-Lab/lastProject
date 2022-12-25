@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
-import type { FormInstance, FormRules } from "element-plus";
-import { keysOf } from "element-plus/es/utils";
+import { ElNotification, FormInstance, FormRules } from "element-plus";
+import axios from "axios";
+
+const API_BASE_URL = "http://127.0.0.1:5233"
 
 const formSize = ref("default");
 const ruleFormRef = ref<FormInstance>();
@@ -114,8 +116,18 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
-      // TODO：注册方法
-      console.log("submit!");
+      const params = {
+        phone: '+86' + ruleForm.phone,
+        userName: ruleForm.userName,
+        birthday: ruleForm.birthYear,
+        pwd: ruleForm.pwd
+      }
+      axios.post(`${API_BASE_URL}/register`, params).then(() => {
+        ElNotification.success("注册成功！，可以前往登录了。")
+        ruleFormRef.value?.resetFields()
+      }).catch( (err) => {
+        ElNotification.error("注册失败，请稍后再试。")
+      })
     } else {
       console.log("error submit!", fields);
     }
@@ -151,11 +163,12 @@ const resetForm = (formEl: FormInstance | undefined) => {
       />
     </el-form-item>
     <el-form-item label="密码" prop="pwd" required>
-      <el-input v-model="ruleForm.pwd" placeholder="请输入您的密码"></el-input>
+      <el-input v-model="ruleForm.pwd" type="password" placeholder="请输入您的密码"></el-input>
     </el-form-item>
     <el-form-item label="再次输入密码" prop="second_pwd" required>
       <el-input
         v-model="ruleForm.second_pwd"
+        type="password"
         placeholder="请确认您的密码"
       ></el-input>
     </el-form-item>
