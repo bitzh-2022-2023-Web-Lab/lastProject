@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ElNotification } from "element-plus";
+import { ElMessage, ElNotification } from "element-plus";
 import { ref } from "vue";
 const data = ref();
 data.value = [
@@ -45,7 +45,8 @@ data.value = [
 ];
 
 const star = (index: number) => {
-  if (data.value[index].isFan) {
+  if(window.localStorage.getItem('token')){
+    if (data.value[index].isFan) {
     ElNotification({
       message: "取消关注成功。",
       type: "success",
@@ -57,6 +58,10 @@ const star = (index: number) => {
     });
   }
   data.value[index].isFan = !data.value[index].isFan;
+  }
+  else {
+    ElMessage.error("当前未登录，请登陆后再试。")
+  }
 };
 
 const navigateToPost = (url: any) => {
