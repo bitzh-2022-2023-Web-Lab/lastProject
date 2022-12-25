@@ -17,6 +17,7 @@
 - Element Plus
 - Axios
 - Vue Router
+- mitt
 
 ## 页面
 - 主页
@@ -27,6 +28,27 @@
 - Helper设置
 - 编辑资料
 - DailyNote卡片
+
+## 使用方法
+```sh
+# 克隆代码
+git clone https://github.com/bitzh-2022-2023-Web-Lab/lastProject.git
+
+# 安装包管理器(可选)
+npm i pnpm -g
+
+# 进入文件夹
+cd lastProject
+
+# 下载依赖
+pnpm install
+
+# 调试
+pnpm run dev
+
+# 打包
+pnpm run build
+```
 
 ## 注意事项
 1. 部分页面需要配合后端才可以正常使用。
