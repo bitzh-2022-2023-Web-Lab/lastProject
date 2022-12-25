@@ -3,9 +3,9 @@ import { UserFilled } from "@element-plus/icons-vue";
 import { reactive } from "vue";
 
 const form = reactive<{
-    userName: String,
-    sex: number,
-    sign: String
+  userName: String;
+  sex: number;
+  sign: String;
 }>({
   userName: "",
   sex: 3,
