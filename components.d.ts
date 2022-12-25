@@ -8,6 +8,8 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Carousel: typeof import('./src/components/Carousel.vue')['default']
+    ChangePwd: typeof import('./src/components/ChangePwd.vue')['default']
+    EditUserInfo: typeof import('./src/components/EditUserInfo.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
@@ -17,6 +19,7 @@ declare module '@vue/runtime-core' {
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
+    ElDivider: typeof import('element-plus/es')['ElDivider']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
@@ -24,6 +27,7 @@ declare module '@vue/runtime-core' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
@@ -34,12 +38,16 @@ declare module '@vue/runtime-core' {
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     HeaderBar: typeof import('./src/components/HeaderBar.vue')['default']
     HeardeBar: typeof import('./src/components/HeardeBar.vue')['default']
+    HelperSetting: typeof import('./src/components/HelperSetting.vue')['default']
     Login: typeof import('./src/components/login.vue')['default']
     PostList: typeof import('./src/components/PostList.vue')['default']
     Register: typeof import('./src/components/register.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    UserCard: typeof import('./src/components/UserCard.vue')['default']
+    UserSiderBar: typeof import('./src/components/UserSiderBar.vue')['default']
   }
 }
