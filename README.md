@@ -52,6 +52,7 @@ pnpm run build
 
 ## 注意事项
 1. 部分页面需要配合后端才可以正常使用。
+2. 测试账号：13000000001，密码：1989Anyuexi
 
 ## 参考资料
 - [Vue.js 文档](https://cn.vuejs.org/)
